@@ -1,0 +1,196 @@
+name: contacts
+version: "1.0"
+description: Standard contact information schema for CRM data
+
+columns:
+  first_name:
+    type: text
+    aliases:
+      - firstname
+      - fname
+      - given_name
+      - givenname
+      - first
+    required: false
+    unique: false
+    description: Contact's first/given name
+
+  last_name:
+    type: text
+    aliases:
+      - lastname
+      - lname
+      - surname
+      - family_name
+      - familyname
+      - last
+    required: false
+    unique: false
+    description: Contact's last/family name
+
+  email:
+    type: email
+    aliases:
+      - email_address
+      - emailaddress
+      - e_mail
+      - mail
+      - primary_email
+    required: false
+    unique: true
+    description: Primary email address
+
+  phone:
+    type: phone
+    aliases:
+      - phone_number
+      - phonenumber
+      - telephone
+      - tel
+      - mobile
+      - cell
+      - cell_phone
+      - work_phone
+      - primary_phone
+    required: false
+    unique: false
+    description: Primary phone number
+
+  company:
+    type: text
+    aliases:
+      - organization
+      - org
+      - employer
+      - company_name
+      - companyname
+      - business
+      - business_name
+    required: false
+    unique: false
+    description: Company or organization name
+
+  title:
+    type: text
+    aliases:
+      - job_title
+      - jobtitle
+      - position
+      - role
+      - job_role
+    required: false
+    unique: false
+    description: Job title or position
+
+  address:
+    type: text
+    aliases:
+      - street
+      - street_address
+      - address_line_1
+      - address1
+      - mailing_address
+    required: false
+    unique: false
+    description: Street address
+
+  address_2:
+    type: text
+    aliases:
+      - address_line_2
+      - address2
+      - suite
+      - apt
+      - unit
+    required: false
+    unique: false
+    description: Secondary address line (apt, suite, etc.)
+
+  city:
+    type: text
+    aliases:
+      - town
+      - locality
+      - municipality
+    required: false
+    unique: false
+    description: City name
+
+  state:
+    type: text
+    aliases:
+      - province
+      - region
+      - state_province
+      - state_code
+    required: false
+    unique: false
+    description: State or province
+
+  postal_code:
+    type: text
+    aliases:
+      - zip
+      - zip_code
+      - zipcode
+      - postcode
+      - post_code
+    required: false
+    unique: false
+    description: Postal or ZIP code
+
+  country:
+    type: text
+    aliases:
+      - nation
+      - country_code
+      - country_name
+    required: false
+    unique: false
+    description: Country name
+
+  website:
+    type: url
+    aliases:
+      - url
+      - web
+      - homepage
+      - company_website
+    required: false
+    unique: false
+    description: Website URL
+
+  notes:
+    type: text
+    aliases:
+      - comments
+      - description
+      - memo
+      - remarks
+    required: false
+    unique: false
+    description: Additional notes or comments
+
+  created_at:
+    type: date
+    aliases:
+      - created
+      - create_date
+      - date_created
+      - added
+      - date_added
+    required: false
+    unique: false
+    description: Record creation date
+
+  updated_at:
+    type: date
+    aliases:
+      - updated
+      - update_date
+      - date_updated
+      - modified
+      - date_modified
+    required: false
+    unique: false
+    description: Last update date
