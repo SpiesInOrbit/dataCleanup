@@ -14,6 +14,7 @@ from datacleanup.matching.column_matcher import ColumnMatcher
 from datacleanup.matching.record_matcher import MatchConfig, RecordMatcher
 from datacleanup.merge.resolver import MergeResolver, MergeStrategy
 from datacleanup.export.csv_writer import CSVWriter
+from datacleanup.export.google_maps import GoogleMapsExporter
 
 app = typer.Typer(
     name="datacleanup",
@@ -159,6 +160,14 @@ def clean(
     schema_path: Optional[Path] = typer.Option(None, help="Schema YAML file"),
     merge_duplicates: bool = typer.Option(True, help="Merge duplicate records"),
     duplicate_threshold: float = typer.Option(0.8, help="Duplicate threshold"),
+    export_google_maps: Optional[Path] = typer.Option(
+        None,
+        help="Export address data to Google My Maps CSV format at specified path"
+    ),
+    google_maps_no_description: bool = typer.Option(
+        False,
+        help="Exclude description column from Google Maps export"
+    ),
 ) -> None:
     """Clean and deduplicate a CSV file."""
     console.print(f"\n[bold]Cleaning:[/bold] {input_path}")
@@ -201,6 +210,19 @@ def clean(
     writer.write(output_path)
 
     console.print(f"\n[bold green]Wrote {len(df)} records to {output_path}[/bold green]")
+
+    # Export to Google Maps if requested
+    if export_google_maps:
+        try:
+            gmaps_exporter = GoogleMapsExporter(df)
+            gmaps_path = gmaps_exporter.export(
+                export_google_maps,
+                include_description=not google_maps_no_description
+            )
+            console.print(f"[bold green]Exported Google My Maps CSV to {gmaps_path}[/bold green]")
+            console.print("[dim]Import this file at https://www.google.com/maps/d/[/dim]")
+        except ValueError as e:
+            console.print(f"[bold red]Google Maps export failed:[/bold red] {e}")
 
 
 @app.command()
