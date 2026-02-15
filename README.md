@@ -8,14 +8,13 @@ A Python utility for ingesting CSV files, matching columns via fuzzy logic, dete
 - **Duplicate Detection**: Identifies potential duplicate records using configurable weighted field matching
 - **Data Normalization**: Standardizes phone numbers, emails, addresses, and names
 - **Merge Resolution**: Intelligent merging of duplicate records with configurable strategies
-- **Google Maps Export**: Export cleaned address data to Google My Maps compatible CSV format for visualization
 - **CLI & API**: Use from command line or integrate into Python applications
 
 ## Installation
 
 ```bash
 # Clone the repository
-git clone https://github.com/spiesinorbit/datacleanup.git
+git clone https://github.com/SpiesInOrbit/datacleanup.git
 cd datacleanup
 
 # Install the package
@@ -44,9 +43,6 @@ datacleanup find-duplicates contacts.csv
 
 # Clean and deduplicate
 datacleanup clean input.csv output.csv
-
-# Clean and export to Google My Maps
-datacleanup clean input.csv output.csv --export-google-maps maps_export.csv
 
 # Generate default schema file
 datacleanup init-schema schema.yaml
@@ -80,69 +76,7 @@ df, results = resolver.bulk_merge(cluster_indices)
 # Export cleaned data
 writer = CSVWriter(df)
 writer.write("cleaned_contacts.csv")
-
-# Export to Google My Maps
-from datacleanup.export import GoogleMapsExporter
-
-gmaps_exporter = GoogleMapsExporter(df)
-gmaps_exporter.export("maps_export.csv", include_description=True)
 ```
-
-## Google Maps Export
-
-Export your cleaned address data to create interactive maps with pins for each location.
-
-### CLI Usage
-
-```bash
-# Export during cleaning
-datacleanup clean input.csv output.csv --export-google-maps maps_export.csv
-
-# Exclude detailed descriptions (keep only name and address)
-datacleanup clean input.csv output.csv \
-    --export-google-maps maps_export.csv \
-    --google-maps-no-description
-```
-
-### Import to Google My Maps
-
-1. Visit [Google My Maps](https://www.google.com/maps/d/)
-2. Create a new map or open an existing one
-3. Click "Import" and select your exported CSV file
-4. Google Maps will automatically geocode addresses and create pins
-
-### Python API
-
-```python
-from datacleanup.export import GoogleMapsExporter
-
-# Create exporter
-exporter = GoogleMapsExporter(df)
-
-# Export with full descriptions
-exporter.export("maps_export.csv", include_description=True)
-
-# Export minimal format (name and address only)
-exporter.export("maps_export.csv", include_description=False)
-
-# Include additional custom columns
-exporter.export(
-    "maps_export.csv",
-    include_description=True,
-    additional_columns=["notes", "created_at"]
-)
-
-# Preview what will be exported
-print(exporter.preview(max_rows=5))
-```
-
-### Export Format
-
-The exported CSV includes:
-
-- **Name**: Combination of first name, last name, and company
-- **Address**: Full formatted address (street, city, state, ZIP, country)
-- **Description** (optional): Contact details including title, phone, email, website, and notes
 
 ## Project Structure
 

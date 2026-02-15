@@ -1,0 +1,107 @@
+name: contacts
+version: '1.0'
+description: Standard contact information schema
+columns:
+  first_name:
+    type: text
+    aliases:
+    - firstname
+    - fname
+    - given_name
+    - givenname
+    required: false
+    unique: false
+    description: Contact's first/given name
+  last_name:
+    type: text
+    aliases:
+    - lastname
+    - lname
+    - surname
+    - family_name
+    required: false
+    unique: false
+    description: Contact's last/family name
+  email:
+    type: email
+    aliases:
+    - email_address
+    - e_mail
+    - mail
+    required: false
+    unique: true
+    description: Primary email address
+  phone:
+    type: phone
+    aliases:
+    - phone_number
+    - telephone
+    - tel
+    - mobile
+    - cell
+    required: false
+    unique: false
+    description: Primary phone number
+  company:
+    type: text
+    aliases:
+    - organization
+    - org
+    - employer
+    - company_name
+    required: false
+    unique: false
+    description: Company or organization name
+  title:
+    type: text
+    aliases:
+    - job_title
+    - position
+    - role
+    required: false
+    unique: false
+    description: Job title or position
+  address:
+    type: text
+    aliases:
+    - street
+    - street_address
+    - address_line_1
+    required: false
+    unique: false
+    description: Street address
+  city:
+    type: text
+    aliases:
+    - town
+    - locality
+    required: false
+    unique: false
+    description: City name
+  state:
+    type: text
+    aliases:
+    - province
+    - region
+    - state_province
+    required: false
+    unique: false
+    description: State or province
+  postal_code:
+    type: text
+    aliases:
+    - zip
+    - zip_code
+    - zipcode
+    - postcode
+    required: false
+    unique: false
+    description: Postal or ZIP code
+  country:
+    type: text
+    aliases:
+    - nation
+    - country_code
+    required: false
+    unique: false
+    description: Country name
